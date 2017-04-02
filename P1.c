@@ -7,10 +7,7 @@
 #include<math.h>
 
 
-//Define mutex object
-pthread_mutex_t lock;
-
-void *isPrime(void *arg)
+void *sieveEratosthenes(void *arg)
 {
     //Cast
     long incoming=(long) arg;
@@ -48,7 +45,7 @@ void *isPrime(void *arg)
         
     {
         if(A[i]==1)
-        printf("%d\n",i);
+            printf("%d\n",i);
     }
     return NULL;
     
@@ -80,7 +77,7 @@ int main(int argc, char *argv[])
     pthread_t tid;
     
     //Create the thread
-    rc=pthread_create(&tid, NULL, isPrime,(void*)n);
+    rc=pthread_create(&tid, NULL, sieveEratosthenes,(void*)n);
     
     //Now wait for thread to exit
     pthread_join(tid, NULL);
