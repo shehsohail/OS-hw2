@@ -6,7 +6,6 @@
 #include<stdbool.h>
 #include<math.h>
 
-
 void *sieveEratosthenes(void *arg)
 {
     //Cast
@@ -53,6 +52,20 @@ void *sieveEratosthenes(void *arg)
     
 }
 
+
+//Function for reversing the digit
+int reverse(int number)
+{
+    int rev = 0;
+    while (number > 0)
+    {
+        rev = (rev*10) + number%10;
+        number = number/10;
+    }
+    return rev;
+    
+}
+
 void *reverseSieve(void *arg)
 {
     //Cast
@@ -85,7 +98,7 @@ void *reverseSieve(void *arg)
     
     
     printf("The prime values upto %ld are:\n", incoming);
-
+    
     
     //Loop for computing reverse and checking if still prime and not same as sieve algorithm
     for(int p=2;p<=incoming;p++)
@@ -94,12 +107,17 @@ void *reverseSieve(void *arg)
         
         if(A[p]==true)
         {
-        
+            printf("%d\n",p);
+           int rev=reverse(p); //reverses number
+            if(p!=rev)
+            {
+            printf("%d\n",rev);
+            }
+           
             
         }
         
     }
-    
     return NULL;
     
 }
@@ -141,7 +159,8 @@ int main(int argc, char *argv[])
     rc2=pthread_create(&tid2, NULL, reverseSieve, (void*)n);
     
     //Now wait for thread to exit
-    pthread_join(tid1, NULL);
+    pthread_join(tid2, NULL);
+    
     
     
     //Exit main thread
