@@ -97,27 +97,24 @@ void *reverseSieve(void *arg)
     }
     
     
-    printf("The prime values upto %ld are:\n", incoming);
+    printf("The prime values derived from reversing the digits:\n", incoming);
     
     
     //Loop for computing reverse and checking if still prime and not same as sieve algorithm
     for(int p=2;p<=incoming;p++)
         
     {
-        
-        if(A[p]==true)
+        if(reverse(p)<=incoming)
         {
-            printf("%d\n",p);
-           int rev=reverse(p); //reverses number
-            if(p!=rev)
+            if(A[p]==true && A[reverse(p)]==true)
             {
-            printf("%d\n",rev);
+                printf("%d\n",p);
+               
             }
-           
-            
         }
-        
+    
     }
+
     return NULL;
     
 }
@@ -160,8 +157,6 @@ int main(int argc, char *argv[])
     
     //Now wait for thread to exit
     pthread_join(tid2, NULL);
-    
-    
     
     //Exit main thread
     pthread_exit(0);
